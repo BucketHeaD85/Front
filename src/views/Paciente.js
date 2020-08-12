@@ -28,7 +28,7 @@ export default class Paciente extends Component {
     }
 
     findPacienteById = (pacienteId) => {
-        axios.get("http://iswayudantia02072020.herokuapp.com/pacientes/"+pacienteId)
+        axios.get("https://iswayudantia02072020.herokuapp.com/pacientes/"+pacienteId)
             .then(response => {
                 if(response.data != null) {
                     this.setState({
@@ -54,7 +54,7 @@ export default class Paciente extends Component {
             estado: this.state.estado
         };
 
-        axios.post("http://iswayudantia02072020.herokuapp.com/pacientes", Paciente)
+        axios.post("https://iswayudantia02072020.herokuapp.com/pacientes", Paciente)
             .then(response => {
                 if(response.data != null) {
                     this.setState({"method":"post"});
@@ -72,7 +72,7 @@ export default class Paciente extends Component {
             estado: this.state.estado
         };
 
-        axios.put("http://iswayudantia02072020.herokuapp.com/pacientes/"+this.state.id, Paciente)
+        axios.put("https://iswayudantia02072020.herokuapp.com/pacientes/"+this.state.id, Paciente)
             .then(response => {
                 if(response.data != null) {
                     this.setState({"method":"put"});

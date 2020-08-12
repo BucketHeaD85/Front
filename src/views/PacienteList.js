@@ -21,7 +21,7 @@ export default class PacienteList extends Component {
     }
     
     findAllPacientes() {
-        axios.get("http://iswayudantia02072020.herokuapp.com/pacientes")
+        axios.get("https://iswayudantia02072020.herokuapp.com/pacientes")
             .then(response => response.data)
             .then((data) => {
                 this.setState({Pacientes: data})
@@ -29,7 +29,7 @@ export default class PacienteList extends Component {
     }
 
     deletePaciente = (pacienteId) => {
-        axios.delete("http://iswayudantia02072020.herokuapp.com/pacientes/"+pacienteId)
+        axios.delete("https://iswayudantia02072020.herokuapp.com/pacientes/"+pacienteId)
             .then(response => {
                 if(response.data != null) {
                     alert("Paciente eliminado exitosamente");
