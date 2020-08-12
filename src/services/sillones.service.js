@@ -14,6 +14,11 @@ function disponibilizar(objeto){
     return api.put(`${baseSillones}/${objeto}`,  config);
 }
 
+function asignar(data){
+    return api.put(`${baseSillones}/Asignar/`,  data);
+}
+
+
 function getAll(){
     return api.get(`${basePath}/`);
 }
@@ -26,11 +31,14 @@ function createHora(data) {
     return api.post(`${baseSillones}/`, data);
 }
 
+
+
 const sillonesService = {
     getAll,
     disponibilizar,
     getIdPaciente,
-    createHora
+    createHora,
+    asignar
 };
 
 export default sillonesService;

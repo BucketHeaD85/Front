@@ -44,6 +44,7 @@ class SillonesList extends Component{
             endDate: new Date(),
             idPaciente: -1,
             idSillon: -1,
+            idSala: -1
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
         this.listadoSillones = this.listadoSillones.bind(this);
@@ -63,7 +64,7 @@ class SillonesList extends Component{
     }
     handleSillon = e =>{
         e.preventDefault();
-        this.setState({idSillon:
+        this.setState({idSala:
         this.ipSill.current.value})
     }
 
@@ -170,8 +171,8 @@ class SillonesList extends Component{
                                 {console.log(moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 {console.log(moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 
-                                <Form.Label>Id Sillon</Form.Label>
-                                <Form.Control type="text" placeholder="Id del sillon" onChange= {this.handleSillon} ref={this.ipSill} size="sm"></Form.Control>
+                                <Form.Label>Sala</Form.Label>
+                                <Form.Control type="text" placeholder="Id de la sala" onChange= {this.handleSillon} ref={this.ipSill} size="sm"></Form.Control>
                                 <Form.Label>Hora inicio</Form.Label>
                                 <Form.Row>
                                 <DatePicker
@@ -200,6 +201,12 @@ class SillonesList extends Component{
                     <Modal.Footer>
                         <Button variant="info" onClick={ ()=> {
                             this.asignarSillon()
+                            sillonesService.asignar({
+                                ocupado: true,
+                                id_paciente: this.state.idPaciente,
+                                id_sillon: this.state.idSillon,
+                                id_sala: this.state.idSala
+                            })
                             this.setState({mostrarVentanaPacientes:false});
                             this.handleHoraSubmit({
                                 idPaciente: this.state.idPaciente,
