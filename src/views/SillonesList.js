@@ -29,6 +29,7 @@ class SillonesList extends Component{
 
         super(props);
         this.ipPaci = React.createRef();
+        this.ipSill = React.createRef();
         this.state = {
             mostrarVentanaPacientes:false,
             mostrarVentanaLiberacion:false,
@@ -42,6 +43,7 @@ class SillonesList extends Component{
             startDate: new Date(),
             endDate: new Date(),
             idPaciente: 0,
+            idSillon: 0,
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
         this.listadoSillones = this.listadoSillones.bind(this);
@@ -49,6 +51,7 @@ class SillonesList extends Component{
         this.liberarSillon = this.liberarSillon.bind(this);
         this.handleHoraSubmit = this.handleHoraSubmit.bind(this);
         this.handlePaciente = this.handlePaciente.bind(this);
+        this.handleSillon = this.handleSillon.bind(this);
         
     
     }
@@ -57,6 +60,11 @@ class SillonesList extends Component{
         e.preventDefault();
         this.setState({idPaciente:
         this.ipPaci.current.value})
+    }
+    handleSillon = e =>{
+        e.preventDefault();
+        this.setState({idSillon:
+        this.ipSill.current.value})
     }
 
 
@@ -142,11 +150,13 @@ class SillonesList extends Component{
                                 <Form.Label>Identificador del paciente</Form.Label>
                                 <Form.Control type="text" placeholder="RUT o DAU" onChange= {this.handlePaciente} ref={this.ipPaci} size="sm"></Form.Control>
                                 {console.log(this.state.idPaciente)}
+                                {console.log(this.state.idSillon)}
                                 
                                 {console.log(moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 {console.log(moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 
-
+                                <Form.Label>Id Sillon</Form.Label>
+                                <Form.Control type="text" placeholder="Id del sillon" onChange= {this.handleSillon} ref={this.ipSill} size="sm"></Form.Control>
                                 <Form.Label>Hora inicio</Form.Label>
                                 <Form.Row>
                                 <DatePicker
@@ -176,7 +186,7 @@ class SillonesList extends Component{
                         <Button variant="info" onClick={
                             ()=> this.handleHoraSubmit({
                                 idPaciente: this.state.idPaciente,
-                                idSillon: "33",
+                                idSillon: this.state.idSillon,
                                 fInicio: moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"),
                                 fTermino: moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss")
                             })
