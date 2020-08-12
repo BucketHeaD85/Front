@@ -73,6 +73,7 @@ class SillonesList extends Component{
         sillonesService.createHora(data)
           .then((response) => console.log(response))
           .catch((error) => console.log(error));
+          this.cargarSillones();
       }
 
     handleChange = date => {
