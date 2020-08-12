@@ -8,7 +8,7 @@ export default [
     {
         path:"/",
         exact:true,
-        component: Paciente
+        component: SillonesList
     },
 
     {

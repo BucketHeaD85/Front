@@ -166,6 +166,7 @@ class SillonesList extends Component{
                                 {console.log(this.state.idPaciente)}
                                 {console.log(this.state.idSillon)}
                                 
+                                
                                 {console.log(moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 {console.log(moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 
@@ -326,7 +327,8 @@ class SillonesList extends Component{
                 <div className="d-flex justify-content-lg-start">
                     <Button variant={variante_outline}
                     onClick={ () => this.setState({
-                        mostrarVentanaPacientes:true
+                        mostrarVentanaPacientes:true,
+                        idSillon:sillon.id_sillon,
                     })}>
                         Asignar paciente
                     </Button>
