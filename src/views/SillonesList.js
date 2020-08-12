@@ -138,7 +138,7 @@ class SillonesList extends Component{
             pacientesService.modificarEstado(paciente.data)
         })
 
-        this.cargarSillones()
+        
         this.setState({
             mostrarVentanaLiberacion:false,
             iidPaciente:-1,
