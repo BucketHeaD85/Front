@@ -7,16 +7,14 @@ import Alert from "react-bootstrap/Alert";
 import Form from 'react-bootstrap/Form'
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Modal from "react-bootstrap/Modal";
-import {
-    
-    FormInput,
-  } from "shards-react";
-
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
 import usuario from "../assets/user.png";
 import check from "../assets/check.png";
 import {trackPromise} from "react-promise-tracker";
 
 import NavigationBar from "./NavigationBar";
+import moment from 'moment';
 
 import sillonesService from "../services/sillones.service";
 import pacientesService from "../services/pacientes.service";
@@ -24,6 +22,7 @@ import pacientesService from "../services/pacientes.service";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+registerLocale('es', es)
 class SillonesList extends Component{
 
     constructor(props) {
@@ -136,10 +135,14 @@ class SillonesList extends Component{
                                 <Form.Label>Identificador del paciente</Form.Label>
                                 <Form.Control type="text" placeholder="RUT o DAU" onChange= {this.handlePaciente} ref={this.ipPaci} size="sm"></Form.Control>
                                 {console.log(this.state.idPaciente)}
+                                
+                                {console.log(moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"))}
+                                
 
                                 <Form.Label>Hora inicio</Form.Label>
                                 <Form.Row>
                                 <DatePicker
+                                locale="es"
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
                                 showTimeSelect
@@ -154,7 +157,7 @@ class SillonesList extends Component{
                             ()=> this.handleHoraSubmit({
                                 idPaciente: this.state.idPaciente,
                                 idSillon: "33",
-                                fInicio: "2020-09-26 23:59:59",
+                                fInicio: moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"),
                                 fTermino: "2020-09-27 23:59:59"
                             })
                         }>
