@@ -22,11 +22,15 @@ function getIdPaciente(id){
     return api.get(`${baseSillones}/Paciente/${id}`);
 }
 
+function createHora(data) {
+    return api.post(`${baseSillones}/`, data);
+}
 
 const sillonesService = {
     getAll,
     disponibilizar,
-    getIdPaciente
+    getIdPaciente,
+    createHora
 };
 
 export default sillonesService;

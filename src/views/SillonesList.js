@@ -17,6 +17,9 @@ import NavigationBar from "./NavigationBar";
 import sillonesService from "../services/sillones.service";
 import pacientesService from "../services/pacientes.service";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 class SillonesList extends Component{
 
     constructor(props) {
@@ -31,13 +34,27 @@ class SillonesList extends Component{
             radios:[],
             checked: false,
             valorRadio: -1,
-            idLiberado: -1
+            idLiberado: -1,
+            startDate: new Date(),
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
         this.listadoSillones = this.listadoSillones.bind(this);
         this.ventanaPacientes = this.ventanaPacientes.bind(this);
         this.liberarSillon = this.liberarSillon.bind(this);
+        this.handleHoraSubmit = this.handleHoraSubmit.bind(this);
     }
+
+    handleHoraSubmit(data) {
+        sillonesService.createHora(data)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+      }
+
+    handleChange = date => {
+        this.setState({
+          startDate: date
+        });
+      };
 
     componentDidMount() {
         this.cargarSillones()
@@ -102,12 +119,31 @@ class SillonesList extends Component{
                             <Form.Group controlId="asignacion">
                                 <Form.Label>Identificador del paciente</Form.Label>
                                 <Form.Control type="text" placeholder="RUT o DAU" size="sm"></Form.Control>
+
+                                <Form.Label>Hora inicio</Form.Label>
+                                <Form.Row>
+                                <DatePicker
+                                selected={this.state.startDate}
+                                onChange={this.handleChange}
+                                showTimeSelect
+                                dateFormat = "Pp"
+                                />
+                                </Form.Row>
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="info">
-                            Ingresar paciente
+                        <Button variant="info" onClick={
+                            ()=> this.handleHoraSubmit({
+                                idPaciente: "78",
+                                idSillon: "33",
+                                fInicio: "2020-09-26 23:59:59",
+                                fTermino: "2020-09-27 23:59:59"
+                            })
+                        }>
+                            
+
+                        Ingresar paciente
                         </Button>
                         <Button variant="light" onClick={() => this.setState({
                             mostrarVentanaPacientes:false
