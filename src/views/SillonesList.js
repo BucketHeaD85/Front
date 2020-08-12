@@ -183,14 +183,16 @@ class SillonesList extends Component{
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="info" onClick={
-                            ()=> this.handleHoraSubmit({
+                        <Button variant="info" onClick={ ()=> {
+                            this.setState({mostrarVentanaPacientes:false});
+                            this.handleHoraSubmit({
                                 idPaciente: this.state.idPaciente,
                                 idSillon: this.state.idSillon,
                                 fInicio: moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"),
                                 fTermino: moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss")
-                            })
-                        }>
+                            });
+
+                        }}>
                             
 
                         Ingresar paciente
