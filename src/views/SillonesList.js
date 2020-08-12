@@ -42,8 +42,8 @@ class SillonesList extends Component{
             idLiberado: -1,
             startDate: new Date(),
             endDate: new Date(),
-            idPaciente: 0,
-            idSillon: 0,
+            idPaciente: -1,
+            idSillon: -1,
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
         this.listadoSillones = this.listadoSillones.bind(this);
@@ -130,6 +130,20 @@ class SillonesList extends Component{
 
     }
 
+    asignarSillon(){
+        pacientesService.findPacienteById(this.state.idPaciente).then((paciente) =>{
+            paciente.data.estado = 5
+            pacientesService.modificarEstado(paciente.data)
+        })
+
+        this.cargarSillones()
+        this.setState({
+            mostrarVentanaLiberacion:false,
+            iidPaciente:-1,
+        })
+
+    }
+
     ventanaPacientes(){
         return(
             <>
@@ -184,6 +198,7 @@ class SillonesList extends Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="info" onClick={ ()=> {
+                            this.asignarSillon()
                             this.setState({mostrarVentanaPacientes:false});
                             this.handleHoraSubmit({
                                 idPaciente: this.state.idPaciente,
