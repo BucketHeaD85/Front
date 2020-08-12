@@ -7,6 +7,10 @@ import Alert from "react-bootstrap/Alert";
 import Form from 'react-bootstrap/Form'
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Modal from "react-bootstrap/Modal";
+import {
+    
+    FormInput,
+  } from "shards-react";
 
 import usuario from "../assets/user.png";
 import check from "../assets/check.png";
@@ -25,6 +29,7 @@ class SillonesList extends Component{
     constructor(props) {
 
         super(props);
+        this.ipPaci = React.createRef();
         this.state = {
             mostrarVentanaPacientes:false,
             mostrarVentanaLiberacion:false,
@@ -36,13 +41,24 @@ class SillonesList extends Component{
             valorRadio: -1,
             idLiberado: -1,
             startDate: new Date(),
+            idPaciente: 0,
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
         this.listadoSillones = this.listadoSillones.bind(this);
         this.ventanaPacientes = this.ventanaPacientes.bind(this);
         this.liberarSillon = this.liberarSillon.bind(this);
         this.handleHoraSubmit = this.handleHoraSubmit.bind(this);
+        this.handlePaciente = this.handlePaciente.bind(this);
+        
+    
     }
+
+    handlePaciente = e =>{
+        e.preventDefault();
+        this.setState({idPaciente:
+        this.ipPaci.current.value})
+    }
+
 
     handleHoraSubmit(data) {
         sillonesService.createHora(data)
@@ -118,7 +134,8 @@ class SillonesList extends Component{
                         <Form>
                             <Form.Group controlId="asignacion">
                                 <Form.Label>Identificador del paciente</Form.Label>
-                                <Form.Control type="text" placeholder="RUT o DAU" size="sm"></Form.Control>
+                                <Form.Control type="text" placeholder="RUT o DAU" onChange= {this.handlePaciente} ref={this.ipPaci} size="sm"></Form.Control>
+                                {console.log(this.state.idPaciente)}
 
                                 <Form.Label>Hora inicio</Form.Label>
                                 <Form.Row>
@@ -135,7 +152,7 @@ class SillonesList extends Component{
                     <Modal.Footer>
                         <Button variant="info" onClick={
                             ()=> this.handleHoraSubmit({
-                                idPaciente: "78",
+                                idPaciente: this.state.idPaciente,
                                 idSillon: "33",
                                 fInicio: "2020-09-26 23:59:59",
                                 fTermino: "2020-09-27 23:59:59"
