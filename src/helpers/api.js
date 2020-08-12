@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const endpoints = {
-    development: 'http://isw-ayudantia.herokuapp.com',
+    development: 'https://isw-ayudantia.herokuapp.com',
     //development: 'http://127.0.0.1:8000',
 };
 
