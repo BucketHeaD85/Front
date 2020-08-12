@@ -40,6 +40,7 @@ class SillonesList extends Component{
             valorRadio: -1,
             idLiberado: -1,
             startDate: new Date(),
+            endDate: new Date(),
             idPaciente: 0,
         }
         this.tarjetaSillon = this.tarjetaSillon.bind(this);
@@ -68,6 +69,12 @@ class SillonesList extends Component{
     handleChange = date => {
         this.setState({
           startDate: date
+        });
+      };
+
+    handleChange2 = date => {
+        this.setState({
+        endDate: date
         });
       };
 
@@ -137,6 +144,7 @@ class SillonesList extends Component{
                                 {console.log(this.state.idPaciente)}
                                 
                                 {console.log(moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"))}
+                                {console.log(moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss"))}
                                 
 
                                 <Form.Label>Hora inicio</Form.Label>
@@ -149,6 +157,18 @@ class SillonesList extends Component{
                                 dateFormat = "Pp"
                                 />
                                 </Form.Row>
+                                <Form.Label>Hora Termino</Form.Label>
+                                <Form.Row>
+                                <DatePicker
+                                locale="es"
+                                selected={this.state.endDate}
+                                onChange={this.handleChange2}
+                                showTimeSelect
+                                dateFormat = "Pp"
+                                />
+                                
+                                </Form.Row>
+
                             </Form.Group>
                         </Form>
                     </Modal.Body>
@@ -158,7 +178,7 @@ class SillonesList extends Component{
                                 idPaciente: this.state.idPaciente,
                                 idSillon: "33",
                                 fInicio: moment(this.state.startDate).format("YYYY-MM-DD HH:mm:ss"),
-                                fTermino: "2020-09-27 23:59:59"
+                                fTermino: moment(this.state.endDate).format("YYYY-MM-DD HH:mm:ss")
                             })
                         }>
                             
